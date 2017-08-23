@@ -11,7 +11,7 @@ namespace Jangi.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            return Content("HomePage");
+            return View();
         }
     }
 }
