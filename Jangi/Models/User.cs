@@ -14,6 +14,7 @@ namespace Jangi.Models
         public virtual string email { get; set; }
         public virtual DateTime birthDate { get; set; }
         public virtual string password { get; set; }
+        public virtual IList<Post> posts { get; set; }
     }
 
     public class UserMap : ClassMapping<User>
@@ -27,6 +28,12 @@ namespace Jangi.Models
             Property(x => x.email, x => x.NotNullable(true));
             Property(x => x.birthDate, x => x.NotNullable(true));
             Property(x => x.password, x => x.NotNullable(true));
+
+            Bag(x => x.posts, x =>
+            {
+                x.Table("posts");
+                x.Key(y => y.Column("id"));
+            }, x => x.OneToMany());
         }
     }
 }

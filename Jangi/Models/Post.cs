@@ -13,8 +13,9 @@ namespace Jangi.Models
         public virtual int id { get; set; }
         public virtual string content { get; set; }
         public virtual DateTime date { get; set; }
-        [ForeignKey("users")]
-        public virtual int author { get; set; }
+        //[ForeignKey("users")]
+        //public virtual int author { get; set; }
+        public virtual User author { get; set; }
         public virtual IList<Tag> tags { get; set; }
     }
 
@@ -28,6 +29,7 @@ namespace Jangi.Models
             Property(x => x.content, x => x.NotNullable(true));
             Property(x => x.date, x => x.NotNullable(true));
             Property(x => x.author, x => x.NotNullable(true));
+            ManyToOne(x => x.author,x )
 
             Bag(x => x.tags, x => {
                 x.Table("post_tags");
