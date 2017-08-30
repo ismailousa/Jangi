@@ -15,6 +15,9 @@ namespace Jangi.Models
         public virtual DateTime birthDate { get; set; }
         public virtual string password { get; set; }
         public virtual IList<Post> posts { get; set; }
+        public virtual IList<Comment> comments { get; set; }
+        public virtual IList<CommentReply> commentReplies { get; set; }
+        public virtual IList<Vote> votes { get; set; }
     }
 
     public class UserMap : ClassMapping<User>
@@ -32,7 +35,33 @@ namespace Jangi.Models
             Bag(x => x.posts, x =>
             {
                 x.Table("posts");
-                x.Key(y => y.Column("id"));
+                x.Inverse(true);
+                x.Cascade(Cascade.All);
+                x.Key(y => y.Column("Author"));
+            }, x => x.OneToMany());
+
+            Bag(x => x.comments, x =>
+            {
+                x.Table("Comments");
+                x.Inverse(true);
+                x.Cascade(Cascade.All);
+                x.Key(y => y.Column("Author"));
+            }, x => x.OneToMany());
+
+            Bag(x => x.posts, x =>
+            {
+                x.Table("CommentReplies");
+                x.Inverse(true);
+                x.Cascade(Cascade.All);
+                x.Key(y => y.Column("Author"));
+            }, x => x.OneToMany());
+
+            Bag(x => x.votes, x =>
+            {
+                x.Table("Vote");
+                x.Inverse(true);
+                x.Cascade(Cascade.All);
+                x.Key(y => y.Column("Voter"));
             }, x => x.OneToMany());
         }
     }

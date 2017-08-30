@@ -28,6 +28,10 @@ namespace Jangi
             mapper.AddMapping<UserMap>();
             mapper.AddMapping<PostMap>();
             mapper.AddMapping<TagMap>();
+            mapper.AddMapping<CommentMap>();
+            mapper.AddMapping<CommentReplyMap>();
+            mapper.AddMapping<TypeMap>();
+            mapper.AddMapping<VoteMap>();
 
             config.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 

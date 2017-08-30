@@ -16,7 +16,7 @@ namespace Jangi.Migrations
             Delete.Table("Posts");
             Delete.Table("Tags");
             Delete.Table("Post_Tags");
-            Delete.Table("Types");
+            Delete.Table("CommentReplies");
             Delete.Table("Comments");
             Delete.Table("VoteType");
             Delete.Table("Vote");
@@ -46,19 +46,21 @@ namespace Jangi.Migrations
                 .WithColumn("postID").AsInt32().ForeignKey("Posts", "id")
                 .WithColumn("tagID").AsInt32().ForeignKey("Tags", "id");
 
-            Create.Table("Types")
-                .WithColumn("id").AsInt32().Identity().PrimaryKey()
-                .WithColumn("Name").AsString(30);
-
             Create.Table("Comments")
                 .WithColumn("id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Type").AsInt32().ForeignKey("Types", "id")
                 .WithColumn("Content").AsCustom("Text")
                 .WithColumn("Date").AsDateTime()
                 .WithColumn("Author").AsInt32().ForeignKey("Users", "id")
-                .WithColumn("Commented").AsInt32();
+                .WithColumn("Post").AsInt32().ForeignKey("Posts", "id");
 
-            Create.Table("VoteType")
+            Create.Table("CommentReplies")
+                .WithColumn("id").AsInt32().PrimaryKey().Identity()
+                .WithColumn("Content").AsCustom("Text")
+                .WithColumn("Date").AsDateTime()
+                .WithColumn("Author").AsInt32().ForeignKey("Users", "id")
+                .WithColumn("Comment").AsInt32().ForeignKey("Comments", "id");
+
+            Create.Table("Types")
                .WithColumn("id").AsInt32().Identity().PrimaryKey()
                 .WithColumn("Name").AsString(30);
 
@@ -66,7 +68,7 @@ namespace Jangi.Migrations
                 .WithColumn("id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("Type").AsInt32().ForeignKey("Types", "id")
                 .WithColumn("Voter").AsInt32().ForeignKey("Users", "id")
-                .WithColumn("VoteType").AsInt32().ForeignKey("VoteType", "id")
+                .WithColumn("VoteType").AsInt32().ForeignKey("Types", "id")
                 .WithColumn("Voted").AsInt32();
         }
     }

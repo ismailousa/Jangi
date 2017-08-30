@@ -2,29 +2,26 @@
 using NHibernate.Mapping.ByCode.Conformist;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Jangi.Models
 {
-    public class Post
+    public class Comment
     {
         public virtual int id { get; set; }
         public virtual string content { get; set; }
         public virtual DateTime date { get; set; }
-        //[ForeignKey("users")]
-        //public virtual int author { get; set; }
         public virtual User author { get; set; }
-        public virtual IList<Tag> tags { get; set; }
-        public virtual IList<Comment> comments { get; set; }
+        public virtual Post post { get; set; }
+        public virtual IList<CommentReply> commentReplies { get; set; }
     }
 
-    public class PostMap : ClassMapping<Post>
+    public class CommentMap : ClassMapping<Comment>
     {
-        public PostMap()
+        public CommentMap()
         {
-            Table("posts");
+            Table("Comments");
 
             Id(x => x.id, x => x.Generator(Generators.Identity));
             Property(x => x.content, x => x.NotNullable(true));
@@ -35,17 +32,17 @@ namespace Jangi.Models
                 map.Column("Author");
             });
 
-            Bag(x => x.tags, x => {
-                x.Table("post_tags");
-                x.Key(y => y.Column("postID"));
-            }, x => x.ManyToMany(y => y.Column("tagID")));
-
-            Bag(x => x.comments, x =>
+            ManyToOne(x => x.post, map =>
             {
-                x.Table("Comments");
+                map.Column("Post");
+            });
+
+            Bag(x => x.commentReplies, x =>
+            {
+                x.Table("CommentReplies");
                 x.Inverse(true);
                 x.Cascade(Cascade.All);
-                x.Key(y => y.Column("Post"));
+                x.Key(y => y.Column("Comment"));
             }, x => x.OneToMany());
         }
     }
