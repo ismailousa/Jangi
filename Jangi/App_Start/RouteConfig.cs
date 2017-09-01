@@ -14,6 +14,7 @@ namespace Jangi
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("Posts","", new { controller = "Posts", action = "Index" });
+            routes.MapRoute("Register", "signup", new { controller = "Auth", action = "Register" });
         }
     }
 }

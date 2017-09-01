@@ -18,6 +18,21 @@ namespace Jangi.Models
         public virtual IList<Comment> comments { get; set; }
         public virtual IList<CommentReply> commentReplies { get; set; }
         public virtual IList<Vote> votes { get; set; }
+
+        public virtual void SetPassword(string password)
+        {
+            this.password = BCrypt.Net.BCrypt.HashPassword(password, 13);
+        }
+
+        public virtual bool CheckPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, this.password);
+        }
+
+        public virtual void FakeHash()
+        {
+            BCrypt.Net.BCrypt.HashPassword("", 13);
+        }
     }
 
     public class UserMap : ClassMapping<User>

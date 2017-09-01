@@ -1,0 +1,32 @@
+﻿@model Jangi.ViewModels.AuthRegister
+
+@{ 
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(x => x.pseudo)
+        @Html.EditorFor(x => x.pseudo)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.email)
+        @Html.EditorFor(x => x.email)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.birthDate)
+        @Html.EditorFor(x => x.birthDate)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.password)
+        @Html.EditorFor(x => x.password)
+    </div>
+
+    <div>
+        <input type="submit" value="Register" title="blalba"/>
+    </div>
+}
