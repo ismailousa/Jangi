@@ -6,27 +6,29 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary()
+
     <div>
-        @Html.LabelFor(x => x.pseudo)
+        @Html.LabelFor(x => x.pseudo, "Pseudo")
         @Html.EditorFor(x => x.pseudo)
     </div>
 
     <div>
-        @Html.LabelFor(x => x.email)
+        @Html.LabelFor(x => x.email, "Email")
         @Html.EditorFor(x => x.email)
     </div>
 
     <div>
-        @Html.LabelFor(x => x.birthDate)
+        @Html.LabelFor(x => x.birthDate,"Date de Naissance")
         @Html.EditorFor(x => x.birthDate)
     </div>
 
     <div>
-        @Html.LabelFor(x => x.password)
+        @Html.LabelFor(x => x.password, "Mot de Passe")
         @Html.EditorFor(x => x.password)
     </div>
 
     <div>
-        <input type="submit" value="Register" title="blalba"/>
+        <input type="submit" value="S'inscrire" title="blalba"/>
     </div>
 }

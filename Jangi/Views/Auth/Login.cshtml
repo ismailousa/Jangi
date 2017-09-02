@@ -1,0 +1,24 @@
+﻿@model Jangi.ViewModels.AuthLogin
+
+@{ 
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <div>
+        @Html.LabelFor(x => x.pseudoORmail, "Pseudo ou Email")
+        @Html.EditorFor(x => x.pseudoORmail)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.password, "Mot de Passe")
+        @Html.EditorFor(x => x.password)
+    </div>
+
+    <div>
+        <input type="submit" value="Se Connecter" />
+    </div>
+}
