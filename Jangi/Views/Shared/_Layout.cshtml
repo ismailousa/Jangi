@@ -27,8 +27,16 @@
                 <header id="header">
                     <a href=@Url.RouteUrl("Posts") class="logo"><strong>Jangi</strong> - <i>Kongossa du Mboa</i></a>
                     <ul class="icons">
-                        <li><a href="@Url.RouteUrl("Login")" class="">Se Connecter</a></li>
-                        <li><a href="@Url.RouteUrl("Register")" class="icon fa-sign">S'inscrire</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@User.Identity.Name</li>
+                            <li><a href="@Url.RouteUrl("Logout")" class="">Se Deconnecter</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.RouteUrl("Login")" class="">Se Connecter</a></li>
+                            <li><a href="@Url.RouteUrl("Register")" class="icon fa-sign">S'inscrire</a></li>
+                        }
                         @*<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
                         <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
                         <li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
@@ -51,13 +59,26 @@
                     </form>
                 </section>
 
+                @if (User.Identity.IsAuthenticated)
+                {
+                <nav id="menu">
+                    <header class="major">
+                        <h2>Profile</h2>
+                    </header>
+                    <ul>
+                        <li><a href="#">Voir mon profile</a></li>
+                        <li><a href="#">Mes publications</a></li>
+                    </ul>
+                </nav>
+                }
+
                 <!-- Menu -->
                 <nav id="menu">
                     <header class="major">
-                        <h2>Menu</h2>
+                        <h2>Categories</h2>
                     </header>
                     <ul>
-                        <li><a href="index.html">Page D'acceuil</a></li>
+                        <li><a href="index.html">Tout</a></li>
                         <li><a href="generic.html">Nouveaux</a></li>
                         <li><a href="elements.html">Populaires</a></li>
                         <!--
@@ -88,7 +109,7 @@
                     </ul>
                 </nav>
 
-                <!-- Section -->
+                <!-- Section 
                 <section>
                     <header class="major">
                         <h2>Ante interdum</h2>
@@ -112,7 +133,7 @@
                     </ul>
                 </section>
 
-                <!-- Section -->
+                <!-- Section 
                 <section>
                     <header class="major">
                         <h2>Get in touch</h2>
@@ -127,6 +148,7 @@
                         </li>
                     </ul>
                 </section>
+                    -->
 
                 <!-- Footer -->
                 <footer id="footer">
