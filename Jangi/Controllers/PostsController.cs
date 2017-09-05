@@ -25,7 +25,16 @@ namespace Jangi.Controllers
 
         public ActionResult New()
         {
-            return View(new NewPost());
+            return View(new NewPost()
+            {
+                tagCheck = Database.Session.Query<Tag>().Select(
+                    tag => new TagCheckBox()
+                    {
+                        Id = tag.id,
+                        Name = tag.tag
+                    }).ToList()
+            }
+            );
         }
     }
 }
