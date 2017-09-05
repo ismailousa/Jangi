@@ -1,0 +1,11 @@
+﻿@model List<Jangi.Models.Tag>
+
+<ul>
+    <li><a href="index.html">Tout</a></li>
+    <li><a href="generic.html">Nouveaux</a></li>
+    <li><a href="elements.html">Populaires</a></li>
+@foreach (var category in Model)
+{
+    <li><a href="#">@category.tag</a></li>
+}
+</ul>

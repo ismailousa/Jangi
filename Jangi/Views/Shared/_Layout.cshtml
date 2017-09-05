@@ -10,7 +10,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" href="~/Content/assets/css/main.css" />
+    @Styles.Render("~/styles")
     <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
     <title>Jangi</title>
@@ -77,10 +77,10 @@
                     <header class="major">
                         <h2>Categories</h2>
                     </header>
-                    <ul>
-                        <li><a href="index.html">Tout</a></li>
-                        <li><a href="generic.html">Nouveaux</a></li>
-                        <li><a href="elements.html">Populaires</a></li>
+                   
+                        @{ 
+                            Html.RenderAction("Categories", "Posts", new {area = string.Empty });
+                        }
                         <!--
                         <li>
                             <span class="opener">Submenu</span>
@@ -106,7 +106,7 @@
                         <li><a href="#">Sapien Mauris</a></li>
                         <li><a href="#">Amet Lacinia</a></li>
                         -->
-                    </ul>
+                    
                 </nav>
 
                 <!-- Section 
@@ -161,11 +161,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="~/Content/"></script>
-    <script src="/Content/assets/js/skel.min.js"></script>
-    <script src="~/Content/assets/js/util.js"></script>
-    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-    <script src="~/Content/assets/js/main.js"></script>
-
+    @Scripts.Render("~/scrips")
+    @RenderSection("Scripts", false)
 </body>
 </html>
