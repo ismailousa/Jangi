@@ -27,7 +27,7 @@ namespace Jangi.Controllers
         {
             return View(new NewPost()
             {
-                tagCheck = Database.Session.Query<Tag>().Select(
+                tags = Database.Session.Query<Tag>().Select(
                     tag => new TagCheckBox()
                     {
                         Id = tag.id,
@@ -35,6 +35,34 @@ namespace Jangi.Controllers
                     }).ToList()
             }
             );
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult New(NewPost form)
+        {
+            if (!ModelState.IsValid)
+            {
+                form.tags = Database.Session.Query<Tag>().Select(
+                    tag => new TagCheckBox()
+                    {
+                        Id = tag.id,
+                        Name = tag.tag
+                    }).ToList();
+                return View(form);
+            }
+
+            var post = new Post
+            {
+                title = form.title,
+                author = Database.Session.Query<User>().FirstOrDefault(x => x.pseudo == User.Identity.Name),
+                date = DateTime.Now,
+                content = form.content
+            };
+
+            //SyncTag(form.tags, post.tags);
+            Database.Session.Save(post);
+            Database.Session.Flush();
+            return RedirectToAction("Index");
         }
     }
 }

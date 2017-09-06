@@ -20,25 +20,28 @@
         </div>
         <div class="col-lg-4">
             <div class="panel panel-info">
-                <div class="panel-heading">Publication</div>
-                <div class="panel-body">
-                    <b><u>Tags</u></b>
+            <div class="panel-heading">Publication</div>
+            <div class="panel-body">
+                <b><u>Tags</u></b>
 
-                        @for (int i = 0; i < Model.tagCheck.Count; i++)
-                        {
-                            <div class="list-group-item" style="margin-left:70px; height: 35px; overflow: auto;">
-                                @Html.Hidden("Model.tagCheck[" + i + "].Id", Model.tagCheck[i].Id)
-                                <label for="tagCheck_@(i)__IsChecked">
-                                    @Html.CheckBox(@*"cinsiyet",*@"tagCheck[" + i + "].IsChecked", Model.tagCheck[i].IsChecked)
-                                    @Model.tagCheck[i].Name
-                                </label>
-                            </div>
-                        }
+                <ul class="list-group" style="height: 180px; overflow: auto;">
+                    @for (int i = 0; i < Model.tags.Count; i++)
+                    {
+                        <li class="list-group-item">
+                            @Html.Hidden("tags[" + i + "].Id", Model.tags[i].Id)
+                            <label for="tags_@(i)__IsChecked">
+                                @Html.CheckBox("tags[" + i + "].IsChecked", Model.tags[i].IsChecked)
+                                @Model.tags[i].Name
+                            </label>
+                        </li>
+                    }
+                </ul>
 
-                    <input type="submit" value="Publier" class="btn btn-success btn-sm" />
-                    <a href="@Url.Action("index")"> ou Annuler</a>
-                </div>
+                <input type="submit" value="Publier" class="btn btn-success btn-sm" />
+                <a href="@Url.Action("index")"> ou Annuler</a>
             </div>
+        </div>
+
         </div>
     </div>
 

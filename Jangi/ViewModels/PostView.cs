@@ -24,8 +24,8 @@ namespace Jangi.ViewModels
         public string content { get; set; }
         public DateTime date { get; set; }
         public User author { get; set; }
-        public IList<Tag> tags { get; set; }
-        public IList<TagCheckBox> tagCheck { get; set; }
+       // public IList<Tag> tags { get; set; }
+        public IList<TagCheckBox> tags { get; set; }
         public IList<Comment> comments { get; set; }
     }
 }

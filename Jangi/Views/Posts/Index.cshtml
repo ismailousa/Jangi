@@ -7,7 +7,10 @@
             @*<h1>
                 Jangis
             </h1>*@
+    @if (User.Identity.IsAuthenticated)
+    {
             <p><a href="@Url.RouteUrl("NewPost")" class="" style="float:right"><b>+</b>Nouvelle Publication</a></p>
+    }
        </header>
         <p> asfdsdagadg dg s</p>
         <!--
