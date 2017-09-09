@@ -18,6 +18,7 @@ namespace Jangi
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" });
             routes.MapRoute("Logout", "logout", new { controller = "Auth", action = "Logout" });
             routes.MapRoute("Layout", "posts/categories", new { controller = "Posts", action = "Categories" });
+            routes.MapRoute("AllPost", "posts/allposts", new { controller = "Posts", action = "Publications" });
             routes.MapRoute("NewPost", "newpost", new { controller = "Posts", action = "New" });
         }
     }

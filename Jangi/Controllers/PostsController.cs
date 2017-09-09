@@ -64,5 +64,11 @@ namespace Jangi.Controllers
             Database.Session.Flush();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Publications()
+        {
+            var model = Database.Session.Query<Post>().OrderByDescending(x => x.date).ToList();
+            return PartialView("_AllPosts",model);
+        }
     }
 }

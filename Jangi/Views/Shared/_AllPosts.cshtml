@@ -1,0 +1,9 @@
+﻿@model List<Jangi.Models.Post>
+
+@foreach (var post in Model)
+{
+    <p>
+        <a href="#">@post.title</a> 
+        <i>@post.author.pseudo - @post.date</i>
+    </p>
+}

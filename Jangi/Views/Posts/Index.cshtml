@@ -4,15 +4,17 @@
 <section id="banner">
     <div class="content">
         <header>
-            @*<h1>
-                Jangis
-            </h1>*@
+            <h2>
+                Toutes les Publications
+            </h2>
     @if (User.Identity.IsAuthenticated)
     {
             <p><a href="@Url.RouteUrl("NewPost")" class="" style="float:right"><b>+</b>Nouvelle Publication</a></p>
     }
        </header>
-        <p> asfdsdagadg dg s</p>
+        @{
+            Html.RenderAction("Publications", "Posts", new { area = string.Empty });
+        }
         <!--
         <header>
             <h1>
@@ -37,7 +39,7 @@
 <!-- Section -->
 <section>
     <header class="major">
-        <h2>Erat lacinia</h2>
+        <h2>Toutes les Publications</h2>
     </header>
     <div class="features">
         <article>
