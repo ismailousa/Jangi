@@ -12,8 +12,7 @@ namespace Jangi.Models
     {
         public virtual int id { get; set; }
         public virtual string tag { get; set; }
-        [ForeignKey("users")]
-        public virtual int author { get; set; }
+        public virtual User author { get; set; }
     }
 
     public class TagMap : ClassMapping<Tag>
@@ -25,6 +24,11 @@ namespace Jangi.Models
             Id(x => x.id, x => x.Generator(Generators.Identity));
             Property(x => x.tag, x => x.NotNullable(true));
             Property(x => x.author, x => x.NotNullable(true));
+
+            ManyToOne(x => x.author, map =>
+            {
+                map.Column("Author");
+            });
         }
     }
 }

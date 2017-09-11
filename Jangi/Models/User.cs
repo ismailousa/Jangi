@@ -18,6 +18,7 @@ namespace Jangi.Models
         public virtual IList<Comment> comments { get; set; }
         public virtual IList<CommentReply> commentReplies { get; set; }
         public virtual IList<Vote> votes { get; set; }
+        public virtual IList<Tag> tags { get; set; }
 
         public virtual void SetPassword(string password)
         {
@@ -77,6 +78,14 @@ namespace Jangi.Models
                 x.Inverse(true);
                 x.Cascade(Cascade.All);
                 x.Key(y => y.Column("Voter"));
+            }, x => x.OneToMany());
+
+            Bag(x => x.tags, x =>
+            {
+                x.Table("tags");
+                x.Inverse(true);
+                x.Cascade(Cascade.None);
+                x.Key(y => y.Column("Author"));
             }, x => x.OneToMany());
         }
     }
