@@ -47,10 +47,10 @@ namespace Jangi.Controllers
         [HttpPost]
         public ActionResult Login(AuthLogin form, string returnUrl)
         {
-            var user = Database.Session.Query<User>().FirstOrDefault(x => x.pseudo == form.pseudoORmail || x.email == form.pseudoORmail);
+            var user = Database.Session.Query<User>().FirstOrDefault(x => x.pseudo == form.pseudoORmail 
+            || x.email == form.pseudoORmail);
 
-            if (user == null)
-            {
+            if (user == null){
                 //Jangi.Models.User.FakeHash();
             }
             if (user == null || !user.CheckPassword(form.password))
@@ -67,8 +67,7 @@ namespace Jangi.Controllers
             return RedirectToRoute("Posts");
         }
 
-        public ActionResult Logout()
-        {
+        public ActionResult Logout(){
             FormsAuthentication.SignOut();
             return RedirectToRoute("Posts");
         }
