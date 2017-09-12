@@ -20,18 +20,15 @@ namespace Jangi.Models
         public virtual IList<Vote> votes { get; set; }
         public virtual IList<Tag> tags { get; set; }
 
-        public virtual void SetPassword(string password)
-        {
+        public virtual void SetPassword(string password){
             this.password = BCrypt.Net.BCrypt.HashPassword(password, 13);
         }
 
-        public virtual bool CheckPassword(string password)
-        {
+        public virtual bool CheckPassword(string password){
             return BCrypt.Net.BCrypt.Verify(password, this.password);
         }
 
-        public virtual void FakeHash()
-        {
+        public virtual void FakeHash(){
             BCrypt.Net.BCrypt.HashPassword("", 13);
         }
     }

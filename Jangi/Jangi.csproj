@@ -240,8 +240,6 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Posts\New.cshtml" />
     <Content Include="Views\Shared\_AllPosts.cshtml" />
-    <Content Include="Views\Posts\Test.cshtml" />
-    <Content Include="Views\Posts\Layo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
