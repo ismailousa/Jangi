@@ -9,7 +9,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     @Styles.Render("~/styles")
     <title>Jangi</title>
 </head>
@@ -64,8 +63,8 @@
                         <h2>Profile</h2>
                     </header>
                     <ul>
-                        <li><a href="#">Voir mon profile</a></li>
-                        <li><a href="#">Mes publications</a></li>
+                        <li><a href="@Url.RouteUrl("MonProfile")">Voir mon profile</a></li>
+                        <li><a href="@Url.RouteUrl("MesPublications")">Mes publications</a></li>
                     </ul>
                 </nav>
                 }

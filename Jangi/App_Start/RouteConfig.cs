@@ -20,6 +20,13 @@ namespace Jangi
             routes.MapRoute("Layout", "posts/categories", new { controller = "Posts", action = "Categories" });
             routes.MapRoute("AllPost", "posts/allposts", new { controller = "Posts", action = "Publications" });
             routes.MapRoute("NewPost", "newpost", new { controller = "Posts", action = "New" });
+            routes.MapRoute("NewTag", "newtag", new { controller = "Posts", action = "NewTag" });
+            routes.MapRoute("MonProfile", "profile", new { controller = "Profile", action = "Index" });
+            routes.MapRoute("ChangePass", "changepassword", new { controller = "Profile", action = "Password" });
+            routes.MapRoute("MesPublications", "myposts", new { controller = "Profile", action = "Publication" });
+            routes.MapRoute("Display", "post/{id}", new { controller = "Posts", action = "Display", id = UrlParameter.Optional });
+            routes.MapRoute("DeletePost", "post/delete/{id}", new { controller = "Profile", action = "DeletePost", id = UrlParameter.Optional });
+            routes.MapRoute("EditPost", "post/edit/{id}", new { controller = "Posts", action = "Edit", id = UrlParameter.Optional });
         }
     }
 }

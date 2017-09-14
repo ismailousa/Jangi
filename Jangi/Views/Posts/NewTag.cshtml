@@ -1,0 +1,13 @@
+﻿@model Jangi.ViewModels.tagViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(f => f.Categorie)
+        @Html.TextBoxFor(f => f.Categorie, new { @class = "form-control" })
+    </div>
+
+    <input type="submit" value="Ajouter"/> 
+    <a href="@Url.Action("New")">ou Annuler</a>
+}

@@ -1,0 +1,11 @@
+﻿@model List<Jangi.Models.Post>
+
+<div class="content">
+    @foreach (var post in Model)
+    {
+        <p>
+            <a href="@Url.RouteUrl("display", new { post.id})">@post.title</a> le
+            <i>@post.date</i>
+        </p>
+    }
+</div>

@@ -1,0 +1,38 @@
+﻿@model Jangi.ViewModels.ProfileInfo
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.id)
+    @Html.ValidationSummary()
+
+    <div>
+        @Html.LabelFor(x => x.pseudo, "Pseudo")
+        @Html.EditorFor(x => x.pseudo, "")
+    </div>
+    <div>
+        @Html.LabelFor(x => x.birthDate, "Date de Naissance")<br/>
+        @Html.EditorFor(x => x.birthDate)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.email, "E-mail")
+        @Html.EditorFor(x => x.email)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.numberOfPosts, "Nombre de Publications")<br />
+        @if (Model.numberOfPosts > 0)
+        {
+            <a href="@Url.RouteUrl("MesPublications")" )>@Model.numberOfPosts</a>
+        }
+        else
+        {
+        <a href="#" )>@Model.numberOfPosts</a>
+        }
+    </div>
+
+    <div>
+        <a href="@Url.RouteUrl("ChangePass")">Changer mon mot de passe</a>
+    </div>
+
+    <input type="submit" value="Modifier"/>
+    <a href="@Url.RouteUrl("Posts")"> ou Annuler</a>
+}

@@ -16,7 +16,7 @@ namespace Jangi.ViewModels
 
     public class NewPost
     {
-
+        public bool isNew { get; set; }
         public int id { get; set; }
         [Required, MaxLength(50)]
         public string title { get; set; }
@@ -24,8 +24,15 @@ namespace Jangi.ViewModels
         public string content { get; set; }
         public DateTime date { get; set; }
         public User author { get; set; }
-       // public IList<Tag> tags { get; set; }
         public IList<TagCheckBox> tags { get; set; }
         public IList<Comment> comments { get; set; }
+        public IList<Tag> tagList { get; set; }
+    }
+
+    public class tagViewModel
+    {
+        public int id { get; set; }
+        [Required, MaxLength(30)]
+        public string Categorie { get; set; }
     }
 }

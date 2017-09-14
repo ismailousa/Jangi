@@ -14,7 +14,7 @@ namespace Jangi.ViewModels
         public string email { get; set; }
         [Required,DataType(DataType.Date)]
         public DateTime birthDate { get; set; }
-        [Required, MaxLength(128)]
+        [Required, MaxLength(128), DataType(DataType.Password)]
         public string password { get; set; }
     }
 

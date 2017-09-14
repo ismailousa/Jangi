@@ -3,7 +3,7 @@
 @foreach (var post in Model)
 {
     <p>
-        <a href="#">@post.title</a> 
+        <a href="@Url.RouteUrl("display", new { post.id})">@post.title</a> 
         <i>@post.author.pseudo - @post.date</i>
     </p>
 }

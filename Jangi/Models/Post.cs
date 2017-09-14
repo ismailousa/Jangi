@@ -19,6 +19,7 @@ namespace Jangi.Models
         public virtual User author { get; set; }
         public virtual IList<Tag> tags { get; set; }
         public virtual IList<Comment> comments { get; set; }
+
     }
 
     public class PostMap : ClassMapping<Post>

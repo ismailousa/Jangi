@@ -23,7 +23,6 @@ namespace Jangi.Models
 
             Id(x => x.id, x => x.Generator(Generators.Identity));
             Property(x => x.tag, x => x.NotNullable(true));
-            Property(x => x.author, x => x.NotNullable(true));
 
             ManyToOne(x => x.author, map =>
             {

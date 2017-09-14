@@ -1,0 +1,56 @@
+﻿@model Jangi.ViewModels.NewPost
+
+@using (Html.BeginForm("Form", "Posts"))
+{
+    if (!Model.isNew)
+    {
+        @Html.HiddenFor(p => p.id)
+    }
+    @Html.ValidationSummary()
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-group">
+                @Html.LabelFor(f => f.title, "Titre")
+                @Html.TextBoxFor(f => f.title, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(f => f.content, "Contenu")
+                @Html.TextAreaFor(f => f.content, new { @id = "MyContent", @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">Publication</div>
+                <div class="panel-body">
+                    <a href="@Url.RouteUrl("NewTag")">Ajouter une categorie</a>
+                    <ul class="list-group" style="height: 180px; overflow: auto;">
+                        @for (int i = 0; i < Model.tags.Count; i++)
+                        {
+                            <li class="list-group-item">
+                                @Html.Hidden("Tags[" + i + "].Id", Model.tags[i].Id)
+                                <label for="Tags_@(i)_IsChecked">
+                                    @Html.CheckBox("Tags[" + i + "].IsChecked", Model.tags[i].IsChecked)
+                                    @Model.tags[i].Name
+                                </label>
+                            </li>
+                        }
+                    </ul>
+
+                    <input type="submit" value="@(Model.isNew ? "Publier" : "Modifier")" class="btn btn-success btn-sm" />
+
+                    <a href="@Url.Action("index")"> ou Annuler</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @section Scripts{
+        <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace("MyContent");
+        </script>
+    }
+}

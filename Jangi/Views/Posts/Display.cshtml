@@ -1,0 +1,24 @@
+﻿@model Jangi.ViewModels.NewPost
+
+<section>
+    <header>
+        <h3>@Model.title</h3>
+    </header>
+    <div>
+        <section>
+            @Html.Raw(Model.content)
+
+            <ul class="icons">
+                <li class="pull-right">Par @Model.author.pseudo le @Model.date</li>
+                <li><a href="#">Upvote</a></li> 
+                <li><a href="#">Downvote</a></li> 
+                <li><a href="#">Comment</a></li> 
+                @if(Model.author.pseudo == User.Identity.Name)
+                {
+                    <li><a href="@Url.RouteUrl("EditPost", new { id = Model.id })">Editer</a></li>
+                    <li><a href="@Url.RouteUrl("DeletePost", new { id = Model.id })">Supprimer</a></li>
+                }
+            </ul>   
+        </section>
+    </div>
+</section>
