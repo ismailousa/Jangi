@@ -1,0 +1,22 @@
+﻿@model Jangi.ViewModels.posts
+<!-- Banner -->
+<section id="banner">
+    <div class="content">
+        <header>
+            <h2>
+             @Model.Category
+            </h2>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p><a href="@Url.RouteUrl("NewPost")" class="" style="float:right"><b>+</b>Nouvelle Publication</a></p>
+            }
+        </header>
+        @foreach (var post in Model.postList)
+        {
+            <p>
+                <a href="@Url.RouteUrl("display", new { post.id})">@post.title</a>
+                <i>@post.author.pseudo - @post.date</i>
+            </p>
+        }
+    </div>
+</section>

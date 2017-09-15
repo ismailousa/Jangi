@@ -10,15 +10,97 @@
 
             <ul class="icons">
                 <li class="pull-right">Par @Model.author.pseudo le @Model.date</li>
-                <li><a href="#">Upvote</a></li> 
-                <li><a href="#">Downvote</a></li> 
-                <li><a href="#">Comment</a></li> 
+                <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i></a></li> 
+                <li><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i></a></li> 
+                <li id="comment"><a href="#"><i class="glyphicon glyphicon-comment"></i></a></li> 
                 @if(Model.author.pseudo == User.Identity.Name)
                 {
-                    <li><a href="@Url.RouteUrl("EditPost", new { id = Model.id })">Editer</a></li>
-                    <li><a href="@Url.RouteUrl("DeletePost", new { id = Model.id })">Supprimer</a></li>
+                    <li><a href="@Url.RouteUrl("EditPost", new { id = Model.id })"><i class="glyphicon glyphicon-edit"></i></a></li>
+                    <li><a href="@Url.RouteUrl("DeletePost", new { id = Model.id })"><i class="glyphicon glyphicon-remove"></i></a></li>
                 }
             </ul>   
+            <div id="txtcomd" style="display:none">
+                @using (Html.BeginForm("comment", "posts"))
+                {
+                    @Html.HiddenFor(p => p.id)
+                    @Html.TextAreaFor(p => p.newComment)
+                    <input type="submit" value="Commenter" />
+                }
+            </div>
+        </section>
+        <section>
+                @foreach (var comment in Model.comments)
+                {
+                    <div style="margin-left:2%">
+                        @comment.content
+                        <ul class="icons">
+                            <li class="pull-right">@comment.author.pseudo - @comment.date</li>
+                            <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i></a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i></a></li>
+                            <li class="reply"><a href="#"><i class="glyphicon glyphicon-comment" id="@comment.id"></i></a></li>
+                            @if (comment.author.pseudo == User.Identity.Name)
+                            {
+                                <li class="cmdEdit"><a href="#"><i class="glyphicon glyphicon-edit" title="@comment.id"></i></a></li>
+                                <li><a href="@Url.RouteUrl("DeleteComment", new { id = comment.id })"><i class="glyphicon glyphicon-remove"></i></a></li>
+                            }
+                        </ul>   
+                        <div id="txtreply@(comment.id)" style="display:none">
+                            @using (Html.BeginForm("reply", "posts"))
+                            {
+                                @Html.Hidden("Cmtid", comment.id)
+                                @Html.TextAreaFor(p => p.newReply)
+                                <input type="submit" value="Commenter" />
+                            }
+                        </div>
+                    </div>
+                
+                foreach (var reply in comment.commentReplies)
+                {
+                        <div style="margin-left:5%">
+                            @reply.content
+                            <ul class="icons">
+                                <li class="pull-right">@reply.author.pseudo - @reply.date</li>
+                                <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i></a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i></a></li>
+                                @if (reply.author.pseudo == User.Identity.Name)
+                                {
+                                    <li class="replyedit"><a href="#"><i class="glyphicon glyphicon-edit" title="@reply.id"></i></a></li>
+                                    <li><a href="@Url.RouteUrl("DeleteReply", new { id=reply.id })"><i class="glyphicon glyphicon-remove"></i></a></li>
+                                }
+                                </ul>
+                                <div id="editreply@(reply.id)" style="display:none">
+                                    @using (Html.BeginForm("editreply", "posts"))
+                                    {
+                                        @Html.Hidden("replyid", reply.id)
+                                        @Html.TextAreaFor(p => p.newReply)
+                                        <input type="submit" value="Editer" />
+                                    }
+                                </div>
+                            </div>
+                }
+       }
         </section>
     </div>
 </section>
+
+@section runText
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#comment a').click(function () {
+                //$('#txtcomd').show()
+                //$('txtcomd').css('display', 'inline')
+                $('#txtcomd').toggle()
+            });
+
+            $('.reply a').click(function (event) {
+                //alert('#reply' + event.target.id)
+                $('#txtreply' + event.target.id).toggle()
+            });
+
+            $('.replyedit a').click(function (event) {
+                $('#editreply' + $(event.target).attr('title')).toggle()
+            });
+        });
+    </script>
+}

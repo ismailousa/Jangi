@@ -14,6 +14,7 @@ namespace Jangi
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("Posts","", new { controller = "Posts", action = "Index" });
+            routes.MapRoute("ListPosts", "{cat}", new { controller = "Posts", action = "List", cat = UrlParameter.Optional });
             routes.MapRoute("Register", "signup", new { controller = "Auth", action = "Register" });
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" });
             routes.MapRoute("Logout", "logout", new { controller = "Auth", action = "Logout" });
@@ -21,6 +22,12 @@ namespace Jangi
             routes.MapRoute("AllPost", "posts/allposts", new { controller = "Posts", action = "Publications" });
             routes.MapRoute("NewPost", "newpost", new { controller = "Posts", action = "New" });
             routes.MapRoute("NewTag", "newtag", new { controller = "Posts", action = "NewTag" });
+            routes.MapRoute("NewComment", "posts/comment", new { controller = "Posts", action = "Comment" });
+            routes.MapRoute("NewReply", "posts/reply", new { controller = "Posts", action = "Reply" });
+            routes.MapRoute("DeleteComment", "profile/deletecomment/{id}", new { controller = "Profile", action = "DeleteComment", id = UrlParameter.Optional});
+            routes.MapRoute("DeleteReply", "profile/deletereply/{id}", new { controller = "Profile", action = "DeleteReply", id = UrlParameter.Optional });
+            routes.MapRoute("EditReply", "profile/editreply", new { controller = "Posts", action = "editReply" });
+            routes.MapRoute("Response", "posts/form", new { controller = "Posts", action = "form" });
             routes.MapRoute("MonProfile", "profile", new { controller = "Profile", action = "Index" });
             routes.MapRoute("ChangePass", "changepassword", new { controller = "Profile", action = "Password" });
             routes.MapRoute("MesPublications", "myposts", new { controller = "Profile", action = "Publication" });

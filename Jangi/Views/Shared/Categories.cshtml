@@ -1,11 +1,11 @@
 ﻿@model List<Jangi.Models.Tag>
 
 <ul>
-    <li><a href="#">Tout</a></li>
-    <li><a href="#">Nouveaux</a></li>
-    <li><a href="#">Populaires</a></li>
+    <li><a href="@Url.RouteUrl("ListPosts", new { cat = "Toutes"})">Toutes</a></li>
+    <li><a href="@Url.RouteUrl("Posts")">Nouvelles</a></li>
+    <li><a href="@Url.RouteUrl("ListPosts", new { cat = "Populaires"})">Populaires</a></li>
 @foreach (var category in Model)
 {
-    <li><a href="#">@category.tag</a></li>
+    <li><a href="@Url.RouteUrl("ListPosts", new { cat = category.tag})">@category.tag</a></li>
 }
 </ul>

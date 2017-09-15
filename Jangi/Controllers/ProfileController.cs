@@ -104,7 +104,7 @@ namespace Jangi.Controllers
             return View(posts);
         }
 
-        public ActionResult DeletePost(int id, string returnUrl)
+        public ActionResult DeletePost(int id)
         {
             var user = Database.Session.Query<User>().FirstOrDefault(x => x.pseudo == User.Identity.Name);
             var post = Database.Session.Load<Post>(id);
@@ -116,6 +116,34 @@ namespace Jangi.Controllers
             }
 
             return RedirectToAction("Publication");
+        }
+
+        public ActionResult DeleteComment(int id)
+        {
+            var user = Database.Session.Query<User>().FirstOrDefault(x => x.pseudo == User.Identity.Name);
+            var comment = Database.Session.Load<Comment>(id);
+
+            if (comment.author == user)
+            {
+                Database.Session.Delete(comment);
+                Database.Session.Flush();
+            }
+
+            return RedirectToRoute("Display", new { id = comment.post.id});
+        }
+
+        public ActionResult DeleteReply(int id)
+        {
+            var user = Database.Session.Query<User>().FirstOrDefault(x => x.pseudo == User.Identity.Name);
+            var reply = Database.Session.Load<CommentReply>(id);
+
+            if (reply.author == user)
+            {
+                Database.Session.Delete(reply);
+                Database.Session.Flush();
+            }
+
+            return RedirectToRoute("Display", new { id = reply.comment.post.id });
         }
     }
 }

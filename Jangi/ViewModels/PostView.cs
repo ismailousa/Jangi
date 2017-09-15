@@ -27,6 +27,8 @@ namespace Jangi.ViewModels
         public IList<TagCheckBox> tags { get; set; }
         public IList<Comment> comments { get; set; }
         public IList<Tag> tagList { get; set; }
+        public string newComment { get; set; }
+        public string newReply { get; set; }
     }
 
     public class tagViewModel
@@ -34,5 +36,11 @@ namespace Jangi.ViewModels
         public int id { get; set; }
         [Required, MaxLength(30)]
         public string Categorie { get; set; }
+    }
+
+    public class posts
+    {
+        public string Category { get; set; }
+        public IList<Post> postList { get; set; }
     }
 }

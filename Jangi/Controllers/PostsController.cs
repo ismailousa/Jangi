@@ -131,6 +131,26 @@ namespace Jangi.Controllers
             return PartialView("_AllPosts",model);
         }
 
+        public ActionResult List(string cat)
+        {
+            posts posts = new posts();
+            switch(cat)
+            {
+                case "Toutes":
+                    posts.postList = Database.Session.Query<Post>().OrderBy(x => x.title).ToList();
+                    break;
+                case "Populaires":
+                    posts.postList = Database.Session.Query<Post>().OrderByDescending(x => x.comments.Count).ToList();
+                    break;
+                default: var tag = Database.Session.Query<Tag>().FirstOrDefault(x => x.tag == cat);
+                    posts.postList = Database.Session.Query<Post>().Where(x => x.tags.Contains(tag)).OrderByDescending(x => x.date).ToList();
+                    break;
+            }
+            posts.Category = cat;
+            //ViewBag.Title = cat;
+            return View(posts);
+        }
+
         public ActionResult Display(int id)
         {
             var post = Database.Session.Load<Post>(id);
@@ -171,6 +191,74 @@ namespace Jangi.Controllers
             Database.Session.Flush();
 
             return RedirectToAction("New");
+        }
+
+        [Authorize,HttpPost, ValidateInput(false)]
+        public ActionResult Comment(NewPost form)
+        {
+            var post = Database.Session.Load<Post>(form.id);
+            if (post == null)
+                return HttpNotFound();
+
+            var comment = new Comment()
+            {
+                post = post,
+                author = Database.Session.Query<User>().FirstOrDefault(x => x.pseudo == User.Identity.Name),
+                content = form.newComment,
+                date = DateTime.Now
+            };
+
+            if(comment.content != null)
+            {
+                Database.Session.Save(comment);
+                Database.Session.Flush();
+            }
+
+            return RedirectToAction("display", new { id = post.id });
+        }
+
+        [Authorize, HttpPost, ValidateInput(false)]
+        public ActionResult Reply(NewPost form)
+        {
+            string val = Convert.ToString(Request.Params["CmtId"]);
+            var comment = Database.Session.Load<Comment>(Int32.Parse(val));
+            if (comment == null)
+                return HttpNotFound();
+
+            var reply = new CommentReply()
+            {
+                comment = comment,
+                author = Database.Session.Query<User>().FirstOrDefault(x => x.pseudo == User.Identity.Name),
+                content = form.newReply,
+                date = DateTime.Now
+            };
+
+            if (reply.content != null)
+            {
+                Database.Session.Save(reply);
+                Database.Session.Flush();
+            }
+
+            return RedirectToAction("display", new { id = comment.post.id });
+        }
+
+        [Authorize, HttpPost, ValidateInput(false)]
+        public ActionResult EditReply(NewPost form)
+        {
+            string val = Convert.ToString(Request.Params["replyid"]);
+            var reply = Database.Session.Load<CommentReply>(Int32.Parse(val));
+            if (reply == null)
+                return HttpNotFound();
+
+            reply.content = form.newReply;
+
+            if (reply.content != null)
+            {
+                Database.Session.Update(reply);
+                Database.Session.Flush();
+            }
+
+            return RedirectToAction("display", new { id = reply.comment.post.id });
         }
     }
 }
