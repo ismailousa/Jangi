@@ -1,0 +1,63 @@
+﻿@model Jangi.ViewModels.PostSearch
+
+<section id="banner">
+
+    @if (Model.posts == null && Model.users == null && Model.tags == null)
+    {
+        <div class="content">
+            <h2>Aucun resultat trouvé</h2>
+        </div>
+    }
+    else
+    {
+        if (Model.posts != null)
+        {
+            <div class="content">
+                <header>
+                    <h2>
+                        Publications
+                    </h2>
+                </header>
+                    @foreach (var data in Model.posts)
+                    {
+                        <p>
+                            <a href="@Url.RouteUrl("display", new { data.id})">@data.title</a>
+                            <i>@data.author.pseudo</i>
+                        </p>
+                    }
+            </div>
+        }
+        if (Model.users != null)
+        {
+            <div class="content">
+                <header>
+                    <h2>
+                        Utilisateurs
+                    </h2>
+                </header>
+                @foreach (var data in Model.users)
+                 {
+                    <p>
+                        <a href="#">@data.pseudo</a>
+                    </p>
+                }
+            </div>
+        }
+        if (Model.tags != null)
+        {
+            <div class="content">
+                <header>
+                    <h2>
+                        Categories
+                    </h2>
+                </header>
+                @foreach (var data in Model.tags)
+                    {
+                    <p>
+                       <a href="@Url.RouteUrl("ListPosts", new { cat = data.tag})">@data.tag</a>
+                    </p>
+                }
+            </div>
+        }
+    }
+</section>

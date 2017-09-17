@@ -41,7 +41,7 @@ namespace Jangi.Controllers
 
         public ActionResult Login()
         {
-            return View(new AuthLogin());
+             return View(new AuthLogin());
         }
 
         [HttpPost]

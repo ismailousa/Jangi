@@ -43,4 +43,11 @@ namespace Jangi.ViewModels
         public string Category { get; set; }
         public IList<Post> postList { get; set; }
     }
+
+    public class PostSearch
+    {
+        public IList<Post> posts;
+        public IList<User> users;
+        public IList<Tag> tags;
+    }
 }

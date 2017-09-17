@@ -266,6 +266,8 @@
     <Content Include="Views\Profile\Publication.cshtml" />
     <Content Include="Views\Posts\NewTag.cshtml" />
     <Content Include="Views\Posts\List.cshtml" />
+    <Content Include="Views\Posts\Error.cshtml" />
+    <Content Include="Views\Posts\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

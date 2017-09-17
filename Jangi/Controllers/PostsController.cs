@@ -1,5 +1,6 @@
 ﻿using Jangi.Models;
 using Jangi.ViewModels;
+using NHibernate.Criterion;
 using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
@@ -259,6 +260,22 @@ namespace Jangi.Controllers
             }
 
             return RedirectToAction("display", new { id = reply.comment.post.id });
+        }
+
+        public ActionResult Error()
+        {
+            return View();
+        }
+
+        public ActionResult Search(string query)
+        {
+
+            return View(new PostSearch
+            {
+                posts = Database.Session.Query<Post>().Where(p => p.title.Like(query)).ToList(),
+                users = Database.Session.Query<User>().Where(u => u.pseudo.Like(query)).ToList(),
+                tags = Database.Session.Query<Tag>().Where(u => u.tag.Like(query)).ToList()
+            });
         }
     }
 }
