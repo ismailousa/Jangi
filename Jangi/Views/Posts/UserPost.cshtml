@@ -1,0 +1,18 @@
+﻿@model Jangi.ViewModels.userResult
+
+<section id="banner">
+    <div class="content">
+        <header>
+            <h2>
+                Les publications de @Model.name
+            </h2>
+        </header>
+        @foreach (var post in Model.posts)
+        {
+        <p>
+            <a href="@Url.RouteUrl("display", new { post.id })">@post.title</a>
+            <i>@post.author.pseudo - @post.date</i>
+        </p>
+        }
+    </div>
+</section>

@@ -38,7 +38,7 @@
                 @foreach (var data in Model.users)
                  {
                     <p>
-                        <a href="#">@data.pseudo</a>
+                        <a href="@Url.RouteUrl("UserDisplay", new { data.pseudo })">@data.pseudo</a>
                     </p>
                 }
             </div>

@@ -277,5 +277,18 @@ namespace Jangi.Controllers
                 tags = Database.Session.Query<Tag>().Where(u => u.tag.Like(query)).ToList()
             });
         }
+
+        public ActionResult UserPost(string pseudo)
+        {
+            var user = Database.Session.Query<User>().FirstOrDefault(u => u.pseudo == pseudo);
+            if (user == null)
+                return HttpNotFound();
+
+            return View(new userResult
+            {
+                name = user.pseudo,
+                posts = user.posts
+            });
+        }
     }
 }

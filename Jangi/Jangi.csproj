@@ -268,6 +268,7 @@
     <Content Include="Views\Posts\List.cshtml" />
     <Content Include="Views\Posts\Error.cshtml" />
     <Content Include="Views\Posts\Search.cshtml" />
+    <Content Include="Views\Posts\UserPost.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

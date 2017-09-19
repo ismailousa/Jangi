@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jangi.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,5 +28,11 @@ namespace Jangi.ViewModels
         public string passwordNew { get; set; }
         [Required, MaxLength(128), DataType(DataType.Password)]
         public string passwordConfirm { get; set; }
+    }
+
+    public class userResult
+    {
+        public string name { get; set; }
+        public IList<Post> posts { get; set; }
     }
 }

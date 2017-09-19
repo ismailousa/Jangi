@@ -26,6 +26,7 @@ namespace Jangi
             routes.MapRoute("NewReply", "posts/reply", new { controller = "Posts", action = "Reply" });
             routes.MapRoute("DeleteComment", "profile/deletecomment/{id}", new { controller = "Profile", action = "DeleteComment", id = UrlParameter.Optional});
             routes.MapRoute("DeleteReply", "profile/deletereply/{id}", new { controller = "Profile", action = "DeleteReply", id = UrlParameter.Optional });
+            routes.MapRoute("UserDisplay", "{pseudo}/posts", new { controller = "Posts", action = "UserPost", pseudo = UrlParameter.Optional });
             routes.MapRoute("EditReply", "profile/editreply", new { controller = "Posts", action = "editReply" });
             routes.MapRoute("Response", "posts/form", new { controller = "Posts", action = "form" });
             routes.MapRoute("MonProfile", "profile", new { controller = "Profile", action = "Index" });
